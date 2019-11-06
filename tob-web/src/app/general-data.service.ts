@@ -234,7 +234,7 @@ export class GeneralDataService {
     }
   }
 
-  public loadFacetOptions(data) {
+  public loadFacetOptions(data, includeAll: boolean = false) {
     let fields = (data.info && data.info.facets && data.info.facets.fields) || {};
     //console.log(fields);
     let options = {
@@ -246,7 +246,7 @@ export class GeneralDataService {
     if (fields) {
       for (let optname in fields) {
         for (let optitem of fields[optname]) {
-          if (!optitem.count)
+          if (!optitem.count && !includeAll)
             // skip facets with no results
             continue;
           let optidx = optname;
